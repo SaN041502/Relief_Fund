@@ -1,4 +1,4 @@
-class Form {
+class UserForm {
   String firstname;
   String lastname;
   String fathername;
@@ -19,7 +19,7 @@ class Form {
   String purpose;
   int amount;
 
-  Form({
+  UserForm({
     required this.firstname,
     required this.lastname,
     required this.fathername,
@@ -41,7 +41,7 @@ class Form {
     required this.amount,
   });
 
-  Form.fromJson(Map<String, Object?> json)
+  UserForm.fromJson(Map<String, Object?> json)
     : this(
         firstname: json['First Name']! as String,
         lastname: json['First Name']! as String,
@@ -64,7 +64,7 @@ class Form {
         amount: json['Amount Needed']! as int,
       );
 
-  Form copyWith({
+  UserForm copyWith({
     String? firstname,
     String? lastname,
     String? fathername,
@@ -85,7 +85,7 @@ class Form {
     String? purpose,
     int? amount,
   }) {
-    return Form(
+    return UserForm(
       firstname: firstname ?? this.firstname,
       lastname: lastname ?? this.lastname,
       fathername: fathername ?? this.fathername,

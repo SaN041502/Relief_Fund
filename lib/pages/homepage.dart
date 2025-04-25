@@ -3,6 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:relief_fund/firebase/authpage.dart';
 import 'package:relief_fund/pages/chatbot.dart';
 import 'package:relief_fund/pages/donation_req_form.dart';
 import 'package:relief_fund/widgets/colors.dart';
@@ -124,7 +125,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         child: Text(
-                          'Donate Now',
+                          'Request for Donation',
                           style: TextStyle(
                             color: AppColors.backgroundColor,
                             fontSize: 18,
@@ -132,7 +133,12 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AuthPage()),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: AppColors.secondaryColor,
                           fixedSize: Size(
@@ -144,7 +150,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         child: Text(
-                          'Request for Donation',
+                          'Donate Now',
                           style: TextStyle(
                             color: AppColors.backgroundColor,
                             fontSize: 18,

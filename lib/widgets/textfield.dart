@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:relief_fund/widgets/colors.dart';
 
 class Textfield extends StatelessWidget {
-  const Textfield({super.key, required this.text1, required this.text2});
+  const Textfield({super.key, required this.text1, required this.text2, this.controller});
 
   final String text1;
   final String text2;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class Textfield extends StatelessWidget {
         SizedBox(width: 5),
         Expanded(
           child: TextFormField(
+            
             // ignore: body_might_complete_normally_nullable
             validator: (value) {
               if (value!.trim().isEmpty) {

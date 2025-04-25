@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:relief_fund/firebase/database_service.dart';
+import 'package:relief_fund/firebase/form.dart';
+import 'package:relief_fund/pages/homepage.dart';
 import 'package:relief_fund/widgets/colors.dart';
 
 import 'package:relief_fund/widgets/textfield.dart';
@@ -16,6 +18,54 @@ class RequestForm extends StatefulWidget {
 
 class _RequestFormState extends State<RequestForm> {
   final ImagePicker imagePicker = ImagePicker();
+
+  final TextEditingController firstnameController = TextEditingController();
+  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController fathernameController = TextEditingController();
+  final TextEditingController mothernameController = TextEditingController();
+  final TextEditingController nidController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
+  final TextEditingController presentAddressController =
+      TextEditingController();
+  final TextEditingController permanentAddressController =
+      TextEditingController();
+  final TextEditingController district1Controller = TextEditingController();
+  final TextEditingController district2Controller = TextEditingController();
+  final TextEditingController thana1Controller = TextEditingController();
+  final TextEditingController thana2Controller = TextEditingController();
+  final TextEditingController postalCode1Controller = TextEditingController();
+  final TextEditingController postalCode2Controller = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController situationDetailsController =
+      TextEditingController();
+  final TextEditingController purposeController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+
+  /*@override
+  void dispose() {
+    super.dispose();
+    firstnameController.dispose();
+    lastnameController.dispose();
+    fathernameController.dispose();
+    mothernameController.dispose();
+    nidController.dispose();
+    phoneController.dispose();
+    birthdateController.dispose();
+    presentAddressController.dispose();
+    permanentAddressController.dispose();
+    district1Controller.dispose();
+    district2Controller.dispose();
+    thana1Controller.dispose();
+    thana2Controller.dispose();
+    postalCode1Controller.dispose();
+    postalCode2Controller.dispose();
+    emailController.dispose();
+    situationDetailsController.dispose();
+    purposeController.dispose();
+    amountController.dispose();
+  }*/
+
   List<XFile>? imageFileList = [];
 
   void selectImages() async {
@@ -39,10 +89,7 @@ class _RequestFormState extends State<RequestForm> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                AppColors.primaryColor,
-                AppColors.secondaryColor,
-              ], 
+              colors: [AppColors.primaryColor, AppColors.secondaryColor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -57,16 +104,25 @@ class _RequestFormState extends State<RequestForm> {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.view_list_sharp, color: AppColors.backgroundColor),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Homepage()),
+            );
+          },
+          icon: Icon(Icons.arrow_back, color: AppColors.backgroundColor),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           child: StreamBuilder(
             stream: _databaseService.getForm(),
             builder: (context, snapshot) {
+              // List form = snapshot.data?.docs ?? [];
+
+              // return ListView.builder(
+              // itemBuilder: (context, index) {
               return Column(
                 children: [
                   Column(
@@ -90,26 +146,52 @@ class _RequestFormState extends State<RequestForm> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  Textfield(text1: 'First Name: ', text2: 'First Name'),
+                  Textfield(
+                    text1: 'First Name: ',
+                    text2: 'First Name',
+                    controller: firstnameController,
+                  ),
                   SizedBox(height: 10),
-                  Textfield(text1: 'Last Name: ', text2: 'Last Name'),
+                  Textfield(
+                    text1: 'Last Name: ',
+                    text2: 'Last Name',
+                    controller: lastnameController,
+                  ),
                   SizedBox(height: 10),
-                  Textfield(text1: "Father's Name:  ", text2: "Father's Name"),
+                  Textfield(
+                    text1: "Father's Name:  ",
+                    text2: "Father's Name",
+                    controller: fathernameController,
+                  ),
                   SizedBox(height: 10),
-                  Textfield(text1: "Mother's Name: ", text2: "Mother's Name"),
+                  Textfield(
+                    text1: "Mother's Name: ",
+                    text2: "Mother's Name",
+                    controller: mothernameController,
+                  ),
                   SizedBox(height: 10),
-                  Textfield(text1: 'Date of Birth: ', text2: 'Date of Birth'),
+                  Textfield(
+                    text1: 'Date of Birth: ',
+                    text2: 'Date of Birth',
+                    controller: birthdateController,
+                  ),
                   SizedBox(height: 10),
                   Textfield(
                     text1: 'NID number: ',
                     text2: 'NID number or Birth Certificate ',
+                    controller: nidController,
                   ),
                   SizedBox(height: 10),
-                  Textfield(text1: 'Phone Number: ', text2: 'Phone Number'),
+                  Textfield(
+                    text1: 'Phone Number: ',
+                    text2: 'Phone Number',
+                    controller: phoneController,
+                  ),
                   SizedBox(height: 10),
                   Textfield(
                     text1: 'Email Address(optional): ',
                     text2: 'Email Address',
+                    controller: emailController,
                   ),
                   SizedBox(height: 10),
                   Container(
@@ -126,6 +208,7 @@ class _RequestFormState extends State<RequestForm> {
                   Textfield(
                     text1: 'Current address: ',
                     text2: 'Provide full address',
+                    controller: presentAddressController,
                   ),
                   SizedBox(height: 10),
                   Row(
@@ -134,6 +217,7 @@ class _RequestFormState extends State<RequestForm> {
                         child: Textfield(
                           text1: 'District 1: ',
                           text2: 'District',
+                          controller: district1Controller,
                         ),
                       ),
                       SizedBox(width: 3),
@@ -141,12 +225,17 @@ class _RequestFormState extends State<RequestForm> {
                         child: Textfield(
                           text1: 'Thana 1: ',
                           text2: 'Thana/Upazilla',
+                          controller: thana1Controller,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
-                  Textfield(text1: 'Postal Code 1: ', text2: 'Postal Code'),
+                  Textfield(
+                    text1: 'Postal Code 1: ',
+                    text2: 'Postal Code',
+                    controller: postalCode1Controller,
+                  ),
                   SizedBox(height: 10),
                   Container(
                     alignment: Alignment.topLeft,
@@ -162,6 +251,7 @@ class _RequestFormState extends State<RequestForm> {
                   Textfield(
                     text1: 'Permanent address: ',
                     text2: 'Provide full address',
+                    controller: permanentAddressController,
                   ),
                   SizedBox(height: 10),
                   Row(
@@ -170,6 +260,7 @@ class _RequestFormState extends State<RequestForm> {
                         child: Textfield(
                           text1: 'District 2: ',
                           text2: 'District',
+                          controller: district2Controller,
                         ),
                       ),
                       SizedBox(width: 3),
@@ -177,12 +268,17 @@ class _RequestFormState extends State<RequestForm> {
                         child: Textfield(
                           text1: 'Thana 2: ',
                           text2: 'Thana/Upazilla',
+                          controller: thana2Controller,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
-                  Textfield(text1: 'Postal Code 2: ', text2: 'Postal Code'),
+                  Textfield(
+                    text1: 'Postal Code 2: ',
+                    text2: 'Postal Code',
+                    controller: postalCode1Controller,
+                  ),
                   SizedBox(height: 10),
                   Container(
                     alignment: Alignment.topLeft,
@@ -199,6 +295,7 @@ class _RequestFormState extends State<RequestForm> {
                   SizedBox(
                     height: 150,
                     child: TextFormField(
+                      controller: situationDetailsController,
                       maxLines: null,
                       expands: true,
                       textAlignVertical: TextAlignVertical.top,
@@ -281,11 +378,13 @@ class _RequestFormState extends State<RequestForm> {
                   Textfield(
                     text1: 'Amount Needed: ',
                     text2: 'Amount you want to request',
+                    controller: amountController,
                   ),
                   SizedBox(height: 10),
                   Textfield(
                     text1: 'Purpose of aid: ',
                     text2: ' e.g. house repair, medical, food, etc.',
+                    controller: purposeController,
                   ),
                   SizedBox(height: 10),
 
@@ -332,7 +431,46 @@ class _RequestFormState extends State<RequestForm> {
 
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      try {
+                        final userForm = UserForm(
+                          firstname: firstnameController.text.trim(),
+                          lastname: lastnameController.text.trim(),
+                          fathername: fathernameController.text.trim(),
+                          mothername: mothernameController.text.trim(),
+                          birthdate: birthdateController.text.trim(),
+                          nid: int.parse(nidController.text.trim()),
+                          phone: int.parse(phoneController.text.trim()),
+                          email: emailController.text.trim(),
+                          presentAddress: presentAddressController.text.trim(),
+                          permanentAddress:
+                              permanentAddressController.text.trim(),
+                          district1: district1Controller.text.trim(),
+                          district2: district2Controller.text.trim(),
+                          thana1: thana1Controller.text.trim(),
+                          thana2: thana2Controller.text.trim(),
+                          postalCode1: int.parse(
+                            postalCode1Controller.text.trim(),
+                          ),
+                          postalCode2: int.parse(
+                            postalCode2Controller.text.trim(),
+                          ),
+                          situationDetails:
+                              situationDetailsController.text.trim(),
+                          purpose: purposeController.text.trim(),
+                          amount: int.parse(amountController.text.trim()),
+                        );
+
+                        _databaseService.addForm(userForm);
+                      } catch (e) {
+                        print('Something went wrong: $e');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Invalid input: ${e.toString()}'),
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.accentColor,
                     ),
