@@ -14,6 +14,19 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   bool _loginPageOpened = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        _openLoginPage();
+      }
+    });
+  }
+
   void _openLoginPage() {
     if (!_loginPageOpened) {
       _loginPageOpened = true;
@@ -42,10 +55,6 @@ class _AuthPageState extends State<AuthPage> {
           if (snapshot.hasData) {
             return DonationPage();
           } else {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              _openLoginPage();
-            });
-
             return Homepage();
           }
         },

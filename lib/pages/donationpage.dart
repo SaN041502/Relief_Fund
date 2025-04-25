@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relief_fund/pages/homepage.dart';
 import 'package:relief_fund/widgets/colors.dart';
@@ -41,7 +42,30 @@ class _DonationPageState extends State<DonationPage> {
           icon: Icon(Icons.arrow_back, color: AppColors.backgroundColor),
         ),
       ),
-      body: Text('Signed In'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: [
+            Text('Signed In'),
+
+            SizedBox(
+              child: ElevatedButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(214, 255, 168, 38),
+                ),
+                child: Text(
+                  'Sign Out',
+                  style: TextStyle(color: AppColors.backgroundColor),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

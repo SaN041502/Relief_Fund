@@ -19,6 +19,10 @@ class _LoginpageState extends State<Loginpage> {
       email: _mailcontroller.text.trim(),
       password: _passwordcontroller.text.trim(),
     );
+
+    if (context.mounted) {
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -66,7 +70,7 @@ class _LoginpageState extends State<Loginpage> {
               'Login to get started',
               style: TextStyle(fontSize: 15, color: AppColors.textColor),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 50),
 
             //TextFields
             Row(
@@ -129,39 +133,9 @@ class _LoginpageState extends State<Loginpage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Text(
-                  'Confirm Password: ',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: AppColors.primaryColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Expanded(
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 10,
-                      ),
-                      hintText: 'again write your password correctly',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
 
             //LogInButton
-            SizedBox(height: 45),
+            SizedBox(height: 50),
             ElevatedButton(
               onPressed: logIn,
               style: ElevatedButton.styleFrom(
