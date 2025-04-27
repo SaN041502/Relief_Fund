@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:relief_fund/firebase_options.dart';
-import 'package:relief_fund/pages/route.dart';
+import 'package:relief_fund/widgets/route.dart';
 import 'package:relief_fund/widgets/colors.dart';
 
 Future<void> main() async {

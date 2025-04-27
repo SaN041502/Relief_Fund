@@ -3,7 +3,8 @@ import 'package:relief_fund/widgets/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  final VoidCallback showLogInPage;
+  const SignUpPage({super.key, required this.showLogInPage});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -18,45 +19,56 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final _passwordcontroller = TextEditingController();
 
-  Future signUp() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _mailcontroller.text.trim(),
-      password: _passwordcontroller.text.trim(),
-    );
-  }
+  final _confirmpasswordcontroller = TextEditingController();
 
   @override
   void dispose() {
     _mailcontroller.dispose();
     _passwordcontroller.dispose();
+    _confirmpasswordcontroller.dispose();
     super.dispose();
   }
 
-  
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _mailcontroller.text.trim(),
+        password: _passwordcontroller.text.trim(),
+      );
+    }
+
+    if (context.mounted) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
+    }
+  }
+
+  bool passwordConfirmed() {
+    // ignore: unrelated_type_equality_checks
+    if (_passwordcontroller.text.trim() ==
+        _confirmpasswordcontroller.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.5,
 
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(50),
           topRight: Radius.circular(50),
         ),
-        gradient: LinearGradient(
-          colors: [
-            const Color.fromARGB(199, 77, 182, 172),
-            const Color.fromARGB(255, 207, 207, 207),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        color: AppColors.backgroundColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             //Headlines
             Text(
@@ -67,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 fontSize: 24,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Text(
               'Fill in your details to get started',
               style: TextStyle(fontSize: 15, color: AppColors.textColor),
@@ -90,21 +102,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _namecontroller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
                       ),
                       hintText: 'full name',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Row(
               children: [
                 Text(
@@ -120,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _phonecontroller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
@@ -134,7 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Row(
               children: [
                 Text(
@@ -150,7 +162,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _mailcontroller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
@@ -164,7 +176,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Row(
               children: [
                 Text(
@@ -181,7 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
@@ -195,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Row(
               children: [
                 Text(
@@ -208,10 +220,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Expanded(
                   child: TextFormField(
+                    controller: _confirmpasswordcontroller,
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
@@ -227,11 +240,11 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
 
             //SignUpButton
-            SizedBox(height: 15),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: signUp,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(214, 255, 168, 38),
+                backgroundColor: AppColors.primaryColor,
               ),
               child: Text(
                 'Sign up',
@@ -240,7 +253,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
 
             //LoginButton
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -248,12 +261,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   'Already have an account? ------ ',
                   style: TextStyle(fontSize: 15, color: AppColors.textColor),
                 ),
-                Text(
-                  'Login Now!',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor,
+                GestureDetector(
+                  onTap: widget.showLogInPage,
+                  child: Text(
+                    'Login Now!',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                 ),
               ],

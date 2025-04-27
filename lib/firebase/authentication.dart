@@ -1,17 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:relief_fund/firebase/auth_page.dart';
 import 'package:relief_fund/pages/donationpage.dart';
 import 'package:relief_fund/pages/homepage.dart';
-import 'package:relief_fund/pages/login.dart';
 
-class AuthPage extends StatefulWidget {
-  const AuthPage({super.key});
+class AuthenticationPage extends StatefulWidget {
+  const AuthenticationPage({super.key});
 
   @override
-  State<AuthPage> createState() => _AuthPageState();
+  State<AuthenticationPage> createState() => _AuthenticationPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _AuthenticationPageState extends State<AuthenticationPage> {
   bool _loginPageOpened = false;
 
   @override
@@ -22,16 +22,17 @@ class _AuthPageState extends State<AuthPage> {
       final user = FirebaseAuth.instance.currentUser;
 
       if (user == null) {
-        _openLoginPage();
+        _openPage();
       }
     });
   }
 
-  void _openLoginPage() {
+  void _openPage() {
     if (!_loginPageOpened) {
       _loginPageOpened = true;
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
 
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -39,7 +40,7 @@ class _AuthPageState extends State<AuthPage> {
             topRight: Radius.circular(50),
           ),
         ),
-        builder: (ctx) => Loginpage(),
+        builder: (ctx) => AuthPage(),
       ).whenComplete(() {
         _loginPageOpened = false;
       });

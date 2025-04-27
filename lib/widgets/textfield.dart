@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:relief_fund/widgets/colors.dart';
 
 class Textfield extends StatelessWidget {
-  const Textfield({super.key, required this.text1, required this.text2, this.controller});
+  const Textfield({
+    super.key,
+    required this.text1,
+    required this.text2,
+    this.controller,
+  });
 
   final String text1;
   final String text2;
@@ -17,13 +22,12 @@ class Textfield extends StatelessWidget {
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
-            color: AppColors.secondaryColor,
+            color: AppColors.textColor,
           ),
         ),
         SizedBox(width: 5),
         Expanded(
           child: TextFormField(
-            
             // ignore: body_might_complete_normally_nullable
             validator: (value) {
               if (value!.trim().isEmpty) {
@@ -33,7 +37,7 @@ class Textfield extends StatelessWidget {
 
             decoration: InputDecoration(
               filled: true,
-              fillColor: const Color.fromARGB(50, 255, 168, 38),
+              fillColor: const Color.fromARGB(255, 219, 218, 218),
               contentPadding: EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 10,

@@ -35,7 +35,7 @@ class Slides extends StatelessWidget {
                   bottom: Radius.circular(50),
                 ),
               ),
-              child: Image.asset(image, fit: BoxFit.cover),
+              child: Image.asset(image, fit: BoxFit.fill),
             ),
           ),
           Column(

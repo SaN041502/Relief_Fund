@@ -83,7 +83,7 @@ class _OpeningState extends State<Opening> {
               ],
             ),
             SizedBox(height: 16),
-            CircularProgressIndicator(color: Color(0xFFFFA726)),
+            CircularProgressIndicator(color: AppColors.backgroundColor),
           ],
         ),
       ),

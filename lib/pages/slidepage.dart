@@ -18,9 +18,10 @@ class _SlidePagesState extends State<SlidePages> {
 
   List<Widget> _Slides = [
     Slides(
-      image: "assets/images/s1.jpg",
-      title: 'slide1',
-      description: 'slide1 description',
+      image: "assets/images/slide1.jpg",
+      title: 'Helping Hands for the Needy',
+      description:
+          "ReliefAid connects donors and victims affected by natural disasters, providing fast and transparent help.",
       buttonText: 'next',
       onPressed: () {
         _pageController.animateToPage(
@@ -31,9 +32,10 @@ class _SlidePagesState extends State<SlidePages> {
       },
     ),
     Slides(
-      image: "assets/images/s2.jpg",
-      title: 'slide2',
-      description: 'slide2 description',
+      image: "assets/images/slide2.jpg",
+      title: 'Transparent Donations',
+      description:
+          "Give with confidence — we guarantee your help gets to those in need.",
       buttonText: 'next',
       onPressed: () {
         _pageController.animateToPage(
@@ -46,9 +48,10 @@ class _SlidePagesState extends State<SlidePages> {
     Builder(
       builder: (context) {
         return Slides(
-          image: "assets/images/s1.jpg",
-          title: 'slide3',
-          description: 'slide3 description',
+          image: "assets/images/slide3.jpg",
+          title: "Apply for Relief, Anytime",
+          description:
+              "Victims can easily apply for help by submitting a simple form with documents and details.",
           buttonText: 'done',
           onPressed: () {
             Navigator.push(

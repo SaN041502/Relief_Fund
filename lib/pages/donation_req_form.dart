@@ -200,6 +200,7 @@ class _RequestFormState extends State<RequestForm> {
                       'Present Address:',
                       style: TextStyle(
                         fontSize: 15,
+                        fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor,
                       ),
                     ),
@@ -243,6 +244,7 @@ class _RequestFormState extends State<RequestForm> {
                       'Permanent Address:',
                       style: TextStyle(
                         fontSize: 15,
+                        fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor,
                       ),
                     ),
@@ -287,7 +289,7 @@ class _RequestFormState extends State<RequestForm> {
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.secondaryColor,
+                        color: AppColors.primaryColor,
                       ),
                     ),
                   ),
@@ -301,7 +303,7 @@ class _RequestFormState extends State<RequestForm> {
                       textAlignVertical: TextAlignVertical.top,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromARGB(50, 255, 168, 38),
+                        fillColor: const Color.fromARGB(255, 219, 218, 218),
                         hintText: 'Write detailed reason for request',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -319,7 +321,7 @@ class _RequestFormState extends State<RequestForm> {
                           'Please upload photos of damages: ',
                           style: TextStyle(
                             fontSize: 15,
-                            color: AppColors.secondaryColor,
+                            color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -327,12 +329,7 @@ class _RequestFormState extends State<RequestForm> {
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                             shape: StadiumBorder(),
-                            backgroundColor: const Color.fromARGB(
-                              193,
-                              255,
-                              168,
-                              38,
-                            ),
+                            backgroundColor: AppColors.primaryColor,
                           ),
                           onPressed: selectImages,
                           icon: Icon(
@@ -394,12 +391,12 @@ class _RequestFormState extends State<RequestForm> {
                       'I declare that the above information is true to the best of my knowledge.',
                       style: TextStyle(
                         fontSize: 15,
-                        color: AppColors.secondaryColor,
+                        color: AppColors.textColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     leading: Checkbox(
-                      activeColor: AppColors.accentColor,
+                      activeColor: AppColors.primaryColor,
                       value: isInformationTrue,
                       onChanged: (value) {
                         setState(() {
@@ -414,12 +411,12 @@ class _RequestFormState extends State<RequestForm> {
                       'I allow ReliefAid to verify my data for aid approval.',
                       style: TextStyle(
                         fontSize: 15,
-                        color: AppColors.secondaryColor,
+                        color: AppColors.textColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     leading: Checkbox(
-                      activeColor: AppColors.accentColor,
+                      activeColor: AppColors.primaryColor,
                       value: allowVerification,
                       onChanged: (value) {
                         setState(() {
@@ -463,7 +460,6 @@ class _RequestFormState extends State<RequestForm> {
 
                         _databaseService.addForm(userForm);
                       } catch (e) {
-                        print('Something went wrong: $e');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Invalid input: ${e.toString()}'),
@@ -472,7 +468,7 @@ class _RequestFormState extends State<RequestForm> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.accentColor,
+                      backgroundColor: AppColors.primaryColor,
                     ),
                     child: Text(
                       'Submit',

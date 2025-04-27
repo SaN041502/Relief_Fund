@@ -3,7 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:relief_fund/firebase/authpage.dart';
+import 'package:relief_fund/firebase/authentication.dart';
 import 'package:relief_fund/pages/chatbot.dart';
 import 'package:relief_fund/pages/donation_req_form.dart';
 import 'package:relief_fund/widgets/colors.dart';
@@ -23,6 +23,8 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -63,14 +65,15 @@ class _HomepageState extends State<Homepage> {
                     children: [
                       CarouselSlider(
                         items: [
-                          SlideImages(imageUrl: 'assets/images/s1.jpg'),
-                          SlideImages(imageUrl: 'assets/images/s2.jpg'),
+                          SlideImages(imageUrl: 'assets/images/image1.jpg'),
+                          SlideImages(imageUrl: 'assets/images/image2.jpg'),
+                          SlideImages(imageUrl: 'assets/images/image3.jpg'),
                         ],
                         options: CarouselOptions(
                           viewportFraction: 1,
                           enableInfiniteScroll: true,
                           autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
+                          autoPlayInterval: Duration(seconds: 2),
                           onPageChanged:
                               (index, _) => controller.updatePage(index),
                         ),
@@ -82,11 +85,11 @@ class _HomepageState extends State<Homepage> {
                         () => Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            for (int i = 0; i < 2; i++)
+                            for (int i = 0; i < 3; i++)
                               Dots(
                                 color:
                                     controller.carouselCurrentIndex.value == i
-                                        ? AppColors.accentColor
+                                        ? AppColors.primaryColor
                                         : Colors.grey,
                               ),
                             SizedBox(width: 5),
@@ -136,7 +139,9 @@ class _HomepageState extends State<Homepage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AuthPage()),
+                            MaterialPageRoute(
+                              builder: (context) => AuthenticationPage(),
+                            ),
                           );
                         },
                         style: TextButton.styleFrom(
@@ -181,7 +186,7 @@ class _HomepageState extends State<Homepage> {
                     MaterialPageRoute(builder: (context) => const ChatBot()),
                   );
                 },
-                backgroundColor: AppColors.accentColor,
+                backgroundColor: AppColors.primaryColor,
                 child: const Icon(
                   Icons.messenger_outline_rounded,
                   color: AppColors.backgroundColor,

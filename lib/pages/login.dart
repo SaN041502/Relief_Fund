@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:relief_fund/pages/forgotpass.dart';
 import 'package:relief_fund/widgets/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Loginpage extends StatefulWidget {
-  const Loginpage({super.key});
+  final VoidCallback showSignUpPage;
+  const Loginpage({super.key, required this.showSignUpPage});
 
   @override
   State<Loginpage> createState() => _LoginpageState();
@@ -21,6 +23,7 @@ class _LoginpageState extends State<Loginpage> {
     );
 
     if (context.mounted) {
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }
   }
@@ -36,25 +39,18 @@ class _LoginpageState extends State<Loginpage> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.5,
 
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(50),
           topRight: Radius.circular(50),
         ),
-        gradient: LinearGradient(
-          colors: [
-            const Color.fromARGB(199, 77, 182, 172),
-            const Color.fromARGB(255, 207, 207, 207),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        color: AppColors.backgroundColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(35.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             //Headlines
             Text(
@@ -65,12 +61,12 @@ class _LoginpageState extends State<Loginpage> {
                 fontSize: 24,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Text(
               'Login to get started',
               style: TextStyle(fontSize: 15, color: AppColors.textColor),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 20),
 
             //TextFields
             Row(
@@ -88,7 +84,7 @@ class _LoginpageState extends State<Loginpage> {
                     controller: _mailcontroller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
@@ -119,7 +115,7 @@ class _LoginpageState extends State<Loginpage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(50, 255, 168, 38),
+                      fillColor: const Color.fromARGB(255, 219, 218, 218),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 10,
@@ -133,13 +129,41 @@ class _LoginpageState extends State<Loginpage> {
                 ),
               ],
             ),
+            SizedBox(height: 10),
+
+            //Forgot Password
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ForgotPassPage();
+                    },
+                  ),
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      fontSize: 15,
+
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             //LogInButton
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: logIn,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(214, 255, 168, 38),
+                backgroundColor: AppColors.primaryColor,
               ),
               child: Text(
                 'Login',
@@ -148,7 +172,7 @@ class _LoginpageState extends State<Loginpage> {
             ),
 
             //LoginButton
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -156,12 +180,15 @@ class _LoginpageState extends State<Loginpage> {
                   "Dont't have an account? ------ ",
                   style: TextStyle(fontSize: 15, color: AppColors.textColor),
                 ),
-                Text(
-                  'SignUp Now!',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor,
+                GestureDetector(
+                  onTap: widget.showSignUpPage,
+                  child: Text(
+                    'SignUp Now!',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                 ),
               ],
