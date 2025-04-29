@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:relief_fund/widgets/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,9 +24,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void dispose() {
+    _namecontroller.dispose();
+    _phonecontroller.dispose();
     _mailcontroller.dispose();
     _passwordcontroller.dispose();
     _confirmpasswordcontroller.dispose();
+
     super.dispose();
   }
 
@@ -35,12 +39,25 @@ class _SignUpPageState extends State<SignUpPage> {
         email: _mailcontroller.text.trim(),
         password: _passwordcontroller.text.trim(),
       );
+
+      addUserInfo(
+        _mailcontroller.text.trim(),
+        _namecontroller.text.trim(),
+        int.parse(_phonecontroller.text.trim()),
+      );
     }
 
     if (context.mounted) {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }
+  }
+
+  Future addUserInfo(String email, String fullname, int phone) async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({'Email': email, 'Full Name': fullname, 'Phone': phone});
   }
 
   bool passwordConfirmed() {

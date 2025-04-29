@@ -28,6 +28,7 @@ class Textfield extends StatelessWidget {
         SizedBox(width: 5),
         Expanded(
           child: TextFormField(
+            controller: controller,
             // ignore: body_might_complete_normally_nullable
             validator: (value) {
               if (value!.trim().isEmpty) {
