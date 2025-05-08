@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:relief_fund/pages/homepage.dart';
 import 'package:relief_fund/widgets/colors.dart';
+import 'package:relief_fund/widgets/notification.dart';
 
 import 'package:relief_fund/widgets/textfield.dart';
 
@@ -452,8 +453,10 @@ class _RequestFormState extends State<RequestForm> {
               ),
 
               SizedBox(height: 10),
+              //button to submit
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async{
+                  //add to firebase
                   addRequestInfo(
                     _firstnameController.text.trim(),
                     _lastnameController.text.trim(),
@@ -475,6 +478,20 @@ class _RequestFormState extends State<RequestForm> {
                     _purposeController.text.trim(),
                     int.parse(_amountController.text.trim()),
                   );
+
+                  //get rid of that form
+                  if (context.mounted) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pop();
+                  }
+
+                  //show that it's done
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('Request submitted!')));
+
+                  //push notification
+                  AllNotification().showNotification(title: "Title",body: "body");
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryColor,
