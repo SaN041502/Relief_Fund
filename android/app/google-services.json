@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "966589441852",
+    "project_id": "relieffund-c9b0e",
+    "storage_bucket": "relieffund-c9b0e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966589441852:android:fe7fac9372e0aa5f7e6039",
+        "android_client_info": {
+          "package_name": "com.example.relief_fund"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ3SRU7iVzT_1VooocG1gSIRwDV9FlKd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

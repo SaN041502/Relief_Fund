@@ -46,7 +46,7 @@ class _MessagesState extends State<Messages> {
                 ),
                 constraints: BoxConstraints(maxWidth: width * 2 / 3),
                 child: Text(
-                  widget.messages[index]['message'].text.text[0],
+                  widget.messages[index]['message'], 
                   style: TextStyle(color: AppColors.backgroundColor),
                 ),
               ),

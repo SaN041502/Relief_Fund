@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +128,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         child: Text(
-                          'Request for Donation',
+                          'Apply for Relief',
                           style: TextStyle(
                             color: AppColors.backgroundColor,
                             fontSize: 18,
@@ -180,7 +180,7 @@ class _HomepageState extends State<Homepage> {
                 bottom: 40,
               ),
               child: FloatingActionButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const ChatBot()),

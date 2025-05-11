@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:relief_fund/firebase_options.dart';
 import 'package:relief_fund/widgets/notification.dart';
 import 'package:relief_fund/widgets/route.dart';
@@ -11,6 +12,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //env file
+  await dotenv.load(fileName: "key.env");
 
   AllNotification().initNotification();
   Future<void> requestNotificationPermission() async {
