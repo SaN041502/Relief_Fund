@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relief_fund/pages/contact.dart';
 import 'package:relief_fund/pages/homepage.dart';
+import 'package:relief_fund/widgets/banner.dart';
 import 'package:relief_fund/widgets/colors.dart';
 
 class DonationPage extends StatefulWidget {
@@ -49,34 +50,66 @@ class _DonationPageState extends State<DonationPage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: [Text('Signed In')],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              CustomBanner(
+                imagePath: 'assets/images/image2.jpg',
+                titles: 'Donte to Flood Affected People!',
+              ),
+              SizedBox(height: 10),
+              CustomBanner(
+                imagePath: 'assets/images/homeless.jpg',
+                titles: 'Donte to Help Homeless People!',
+              ),
+              SizedBox(height: 10),
+              CustomBanner(
+                imagePath: 'assets/images/medical.jpeg',
+                titles: 'Medical Aid for the Poor!',
+              ),
+              SizedBox(height: 10),
+              CustomBanner(
+                imagePath: 'assets/images/edu.jpg',
+                titles: 'Education Aid for Children!',
+              ),
+              SizedBox(height: 10),
+              CustomBanner(
+                imagePath: 'assets/images/fire.jpg',
+                titles: 'Donte to Fire Accident Victims!',
+              ),
+              SizedBox(height: 10),
+              CustomBanner(
+                imagePath: 'assets/images/drought.jpg',
+                titles: 'Donte for Drought Relief!',
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
+//custom drawer
 void _openCustomDrawer(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: true,
     builder: (context) {
       return Align(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.topRight,
         child: Material(
           color: Colors.transparent,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.7,
-            height: 200,
+            height: 150,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                topRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+                topLeft: Radius.circular(20),
               ),
               boxShadow: [
                 BoxShadow(
@@ -87,7 +120,7 @@ void _openCustomDrawer(BuildContext context) {
               ],
             ),
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(30),
               child: Column(
                 children: [
                   GestureDetector(
@@ -116,8 +149,10 @@ void _openCustomDrawer(BuildContext context) {
                   SizedBox(height: 5),
                   GestureDetector(
                     onTap: () {
+                      Navigator.of(context, rootNavigator: true).pop();
                       FirebaseAuth.instance.signOut();
                     },
+
                     child: Row(
                       children: [
                         Icon(Icons.info, color: AppColors.textColor),

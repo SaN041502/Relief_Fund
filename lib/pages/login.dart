@@ -181,6 +181,7 @@ class _LoginpageState extends State<Loginpage> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () async {
+                    Navigator.pop(context);
                     await logIn();
                   },
                   style: ElevatedButton.styleFrom(

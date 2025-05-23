@@ -55,7 +55,9 @@ class _ChatBotState extends State<ChatBot> {
   }
 
   Future<List<double>> getEmbedding(String input) async {
-    final url = Uri.parse("https://minilm-production.up.railway.app/embed");
+    final url = Uri.parse(
+      "https://chatbot-production-7f53.up.railway.app/embed",
+    );
 
     final response = await http.post(
       url,
