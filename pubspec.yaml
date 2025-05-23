@@ -86,7 +86,6 @@ flutter:
      - assets/images/image2.jpg
      - assets/images/image3.jpg
      - assets/images/logo.png
-     - assets/dialog_flow_auth.json
      - key.env
      
   # An image asset can refer to one or more resolution-specific "variants", see

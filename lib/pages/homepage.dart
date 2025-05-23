@@ -4,8 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:relief_fund/firebase/authentication.dart';
+import 'package:relief_fund/pages/aboutus.dart';
 import 'package:relief_fund/pages/chatbot.dart';
+import 'package:relief_fund/pages/contact.dart';
 import 'package:relief_fund/pages/donation_req_form.dart';
+import 'package:relief_fund/pages/terms.dart';
 import 'package:relief_fund/widgets/colors.dart';
 import 'package:relief_fund/widgets/controller.dart';
 import 'package:relief_fund/widgets/dots.dart';
@@ -26,13 +29,11 @@ class _HomepageState extends State<Homepage> {
       resizeToAvoidBottomInset: false,
 
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppColors.backgroundColor),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                AppColors.primaryColor,
-                AppColors.secondaryColor,
-              ], // Define your gradient colors
+              colors: [AppColors.primaryColor, AppColors.secondaryColor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -47,8 +48,8 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.view_list_sharp, color: AppColors.backgroundColor),
+          icon: Icon(Icons.menu, color: Colors.white),
+          onPressed: () => _openCustomDrawer(context),
         ),
       ),
       body: Column(
@@ -250,3 +251,115 @@ class SlideImages extends StatelessWidget {
     );
   }
 }
+
+//drawer
+void _openCustomDrawer(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return Align(
+        alignment: Alignment.topLeft,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: 200,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  offset: Offset(3, 3),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap:
+                        () => showDialog(
+                          context: context,
+                          builder: (context) => Contact(),
+                        ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.contact_page, color: AppColors.textColor),
+                        SizedBox(width: 20),
+                        Text(
+                          'Contact Us',
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Divider(color: Colors.grey, thickness: 1),
+                  SizedBox(height: 5),
+                  GestureDetector(
+                    onTap:
+                        () => showDialog(
+                          context: context,
+                          builder: (context) => Aboutus(),
+                        ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.info, color: AppColors.textColor),
+                        SizedBox(width: 20),
+                        Text(
+                          'About Us',
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Divider(color: Colors.grey, thickness: 1),
+                  SizedBox(height: 5),
+                  GestureDetector(
+                    onTap:
+                        () => showDialog(
+                          context: context,
+                          builder: (context) => Terms(),
+                        ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.description, color: AppColors.textColor),
+                        SizedBox(width: 20),
+                        Text(
+                          'Terms & Conditions',
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+

@@ -55,17 +55,19 @@ class _ChatBotState extends State<ChatBot> {
   }
 
   Future<List<double>> getEmbedding(String input) async {
-    final url = Uri.parse("http://192.168.0.220:5000/embed");
+    final url = Uri.parse("https://minilm-production.up.railway.app/embed");
 
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({"text": input}),
+      body: jsonEncode({
+        "texts": [input],
+      }),
     );
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return List<double>.from(data['embedding']);
+      return List<double>.from(data['embeddings'][0]);
     } else {
       print('Status code: ${response.statusCode}');
       print('Response body: ${response.body}');
