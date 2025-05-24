@@ -26,6 +26,15 @@ class CustomBanner extends StatelessWidget {
           ),
         ),
         borderRadius: const BorderRadius.all(Radius.circular(20)),
+        boxShadow: [
+          BoxShadow(
+            // ignore: deprecated_member_use
+            color: Colors.black.withOpacity(0.5),
+            blurRadius: 10,
+            spreadRadius: 1,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Padding(
         padding: EdgeInsets.all(20.0),

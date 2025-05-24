@@ -17,6 +17,7 @@ class _LoginpageState extends State<Loginpage> {
 
   final _passwordcontroller = TextEditingController();
 
+  //authenticating email and pass for successfull login
   Future<void> logIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -24,6 +25,7 @@ class _LoginpageState extends State<Loginpage> {
         password: _passwordcontroller.text.trim(),
       );
 
+      // sending notification if success
       if (context.mounted) {
         final notifier = AllNotification();
         await notifier.initNotification();
@@ -38,7 +40,6 @@ class _LoginpageState extends State<Loginpage> {
     } catch (e) {
       // ignore: avoid_print
       print('Login error: $e');
-      // Optionally show an error notification here
     }
   }
 
@@ -140,6 +141,7 @@ class _LoginpageState extends State<Loginpage> {
                             horizontal: 10,
                           ),
                           hintText: 'ABcd123@#',
+
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),

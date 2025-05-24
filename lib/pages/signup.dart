@@ -33,6 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
+  // after confirming password , creating new acc
+
   Future signUp() async {
     if (passwordConfirmed()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -53,6 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
+  //storing data after successfull confirmation
   Future addUserInfo(String email, String fullname, int phone) async {
     await FirebaseFirestore.instance
         .collection('user')
@@ -60,6 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
         .set({'Email': email, 'Full Name': fullname, 'Phone': phone});
   }
 
+  //confirm pass
   bool passwordConfirmed() {
     // ignore: unrelated_type_equality_checks
     if (_passwordcontroller.text.trim() ==
