@@ -455,7 +455,7 @@ class _RequestFormState extends State<RequestForm> {
               SizedBox(height: 10),
               //button to submit
               ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   //add to firebase
                   addRequestInfo(
                     _firstnameController.text.trim(),
@@ -491,7 +491,11 @@ class _RequestFormState extends State<RequestForm> {
                   ).showSnackBar(SnackBar(content: Text('Request submitted!')));
 
                   //push notification
-                  AllNotification().showNotification(title: "Title",body: "body");
+                  AllNotification().showNotification(
+                    title: "Form has been submitted!",
+                    body:
+                        "Our agent will soon verify your form and contact you for further instruction.",
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryColor,

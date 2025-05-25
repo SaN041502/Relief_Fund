@@ -57,12 +57,12 @@ class _DonationPageState extends State<DonationPage> {
             children: [
               CustomBanner(
                 imagePath: 'assets/images/image2.jpg',
-                titles: 'Donte to Flood Affected People!',
+                titles: 'Donate to Flood Affected People!',
               ),
               SizedBox(height: 10),
               CustomBanner(
                 imagePath: 'assets/images/homeless.jpg',
-                titles: 'Donte to Help Homeless People!',
+                titles: 'Donate to Help Homeless People!',
               ),
               SizedBox(height: 10),
               CustomBanner(
@@ -77,12 +77,12 @@ class _DonationPageState extends State<DonationPage> {
               SizedBox(height: 10),
               CustomBanner(
                 imagePath: 'assets/images/fire.jpg',
-                titles: 'Donte to Fire Accident Victims!',
+                titles: 'Donate to Fire Accident Victims!',
               ),
               SizedBox(height: 10),
               CustomBanner(
                 imagePath: 'assets/images/drought.jpg',
-                titles: 'Donte for Drought Relief!',
+                titles: 'Donate for Drought Relief!',
               ),
             ],
           ),
